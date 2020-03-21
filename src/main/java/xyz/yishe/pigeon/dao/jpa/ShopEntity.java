@@ -32,7 +32,7 @@ public class ShopEntity extends BaseBean {
     @GeneratedValue(generator = "shopIdGenerator")
     @GenericGenerator(
             name = "shopIdGenerator",
-            strategy = "xyz.yishe.pigeon.dao.jpa.id.generator.ShopIdGenerator"
+            strategy = "xyz.yishe.pigeon.dao.id.generator.ShopIdGenerator"
     )
     private String id;
 
