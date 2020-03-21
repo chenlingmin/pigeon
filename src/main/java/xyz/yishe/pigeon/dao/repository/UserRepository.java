@@ -11,5 +11,5 @@ import java.util.Optional;
  */
 public interface UserRepository extends CrudRepository<UserEntity, String> {
     Optional<UserEntity> findByOpenId(String openId);
-    Optional<UserEntity> findByMobile(String mobile);
+    Optional<UserEntity> findByPhone(String phone);
 }
