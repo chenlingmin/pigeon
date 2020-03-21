@@ -1,4 +1,4 @@
-//package xyz.yishe.pigeon.dao.entity;
+//package xyz.yishe.pigeon.dao.jpa.entity;
 //
 //import lombok.AllArgsConstructor;
 //import lombok.Builder;

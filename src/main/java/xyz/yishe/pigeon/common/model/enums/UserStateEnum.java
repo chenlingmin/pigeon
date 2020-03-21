@@ -5,28 +5,27 @@ import lombok.Getter;
 import static java.util.Arrays.stream;
 
 /**
- * 配置项类型枚举
+ * 用户状态枚举
  *
  * @author owen
  * @date 2019-06-24 16:29
  */
 @Getter
-public enum ConfigTypeEnum {
-    TYPE_NUMBER     (1, "数字"),
-    TYPE_STRING     (2, "字符串"),
-    TYPE_DATE       (3, "日期"),
+public enum UserStateEnum {
+    OK                (1, "正常"),
+    BAN               (2, "禁用"),
     ;
 
     private final int value;
     private final String name;
 
-    ConfigTypeEnum(int value, String name) {
+    UserStateEnum(int value, String name) {
         this.value = value;
         this.name = name;
     }
 
-    public static ConfigTypeEnum fromValue(int value) {
-        return stream(ConfigTypeEnum.values())
+    public static UserStateEnum fromValue(int value) {
+        return stream(UserStateEnum.values())
                 .filter(e -> e.getValue() == value)
                 .findAny()
                 .orElse(null);

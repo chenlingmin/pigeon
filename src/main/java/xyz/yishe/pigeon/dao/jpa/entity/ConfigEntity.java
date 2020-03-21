@@ -1,4 +1,4 @@
-package xyz.yishe.pigeon.dao.entity;
+package xyz.yishe.pigeon.dao.jpa.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,6 +14,8 @@ import javax.persistence.*;
 import java.util.Date;
 
 /**
+ * 系统配置项
+ *
  * @author owen
  * @date 2019-08-22 20:09
  */
@@ -23,15 +25,27 @@ import java.util.Date;
 @NoArgsConstructor
 @Accessors(chain = true)
 @Entity
-@Table(name = "role")
+@Table(name = "config", indexes = {
+        @Index(name = "idx_config_key", columnList = "keyword", unique = true)
+})
 @EntityListeners(AuditingEntityListener.class)
-public class RoleEntity extends BaseBean {
+public class ConfigEntity extends BaseBean {
     @Id
+    @Column(length = 32)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
-    @Column(columnDefinition = "VARCHAR(64) COMMENT '角色名称'")
-    private String roleName;
+    @Column(columnDefinition = "VARCHAR(64) COMMENT '关键字'")
+    private String keyword;
+
+    @Column(columnDefinition = "INT COMMENT '类型 1：数字 2：字符串 3：日期'")
+    private Integer type;
+
+    @Column(columnDefinition = "VARCHAR(256) COMMENT '值'")
+    private String value;
+
+    @Column(columnDefinition = "VARCHAR(256) COMMENT '备注'")
+    private String remark;
 
     @Column(columnDefinition = "DATETIME COMMENT '创建时间'")
     @CreatedDate

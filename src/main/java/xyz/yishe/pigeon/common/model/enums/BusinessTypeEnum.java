@@ -5,13 +5,13 @@ import lombok.Getter;
 import static java.util.Arrays.stream;
 
 /**
- * 账户业务类型枚举
+ * 业务类型枚举
  *
  * @author owen
  * @date 2019-06-24 16:29
  */
 @Getter
-public enum BizTypeEnum {
+public enum BusinessTypeEnum {
     RECYCLE                (1, "回收"),
     CONSIGNMENT_SALES      (2, "寄售"),
     SALES                  (3, "销售"),
@@ -24,13 +24,13 @@ public enum BizTypeEnum {
     private final int value;
     private final String name;
 
-    BizTypeEnum(int value, String name) {
+    BusinessTypeEnum(int value, String name) {
         this.value = value;
         this.name = name;
     }
 
-    public static BizTypeEnum fromValue(int value) {
-        return stream(BizTypeEnum.values())
+    public static BusinessTypeEnum fromValue(int value) {
+        return stream(BusinessTypeEnum.values())
                 .filter(e -> e.getValue() == value)
                 .findAny()
                 .orElse(null);

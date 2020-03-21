@@ -1,4 +1,4 @@
-package xyz.yishe.pigeon.dao.entity;
+package xyz.yishe.pigeon.dao.jpa;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -46,7 +46,7 @@ public class ShopEntity extends BaseBean {
     private String contact;
 
     @Column(columnDefinition = "VARCHAR(16) COMMENT '联系号码'")
-    private String mobile;
+    private String phone;
 
     @Column(columnDefinition = "VARCHAR(64) COMMENT '省'")
     private String province;
@@ -60,6 +60,9 @@ public class ShopEntity extends BaseBean {
     @Column(columnDefinition = "VARCHAR(256) COMMENT '详细地址'")
     private String address;
 
+    /**
+     * @see xyz.yishe.pigeon.common.model.enums.ShopStateEnum
+     */
     @Column(columnDefinition = "INT COMMENT '状态 1：待认证 2：已认证 3：已禁用'")
     private Integer state;
 

@@ -1,4 +1,4 @@
-package xyz.yishe.pigeon.dao.entity;
+package xyz.yishe.pigeon.dao.jpa.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -51,12 +51,15 @@ public class UserEntity extends BaseBean {
     @Column(columnDefinition = "VARCHAR(64) COMMENT '昵称'")
     private String nickname;
 
-    @Column(columnDefinition = "VARCHAR(256) COMMENT '微信头像'")
+    @Column(columnDefinition = "VARCHAR(256) COMMENT '头像'")
     private String avatar;
 
-    @Column(columnDefinition = "VARCHAR(128) COMMENT '微信OPEN ID'")
-    private String openId;
+//    @Column(columnDefinition = "VARCHAR(128) COMMENT '微信OPEN ID'")
+//    private String openId;
 
+    /**
+     * @see xyz.yishe.pigeon.common.model.enums.UserStateEnum
+     */
     @Column(columnDefinition = "INT COMMENT '状态 1：正常 2：禁用'")
     private Integer state;
 

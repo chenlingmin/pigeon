@@ -7,7 +7,7 @@ import static xyz.yishe.pigeon.common.model.enums.ConfigTypeEnum.TYPE_NUMBER;
 import static xyz.yishe.pigeon.common.model.enums.ConfigTypeEnum.TYPE_STRING;
 
 /**
- * pei枚举
+ * 配置项枚举
  *
  * @author owen
  * @date 2019-06-24 16:29

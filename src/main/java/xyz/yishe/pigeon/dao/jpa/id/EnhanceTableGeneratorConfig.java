@@ -1,4 +1,4 @@
-package xyz.yishe.pigeon.dao.id;
+package xyz.yishe.pigeon.dao.jpa.id;
 
 import java.util.function.Supplier;
 
