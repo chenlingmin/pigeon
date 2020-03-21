@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: pigeon
+  profiles:
+    active: dev
+    include: business
+
+
+---
+spring:
+  application:
+    name: pigeon
+  profiles:
+    active: pro
+    include: business
+
+
+
+
+
+

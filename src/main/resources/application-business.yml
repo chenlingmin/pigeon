@@ -1,0 +1,11 @@
+wechat:
+  mp:
+    app-id: wxb8908940bdfaad73
+    secret: 0faf5c1ebda8f3b3d39660b4e172e918
+
+## 定时任务触发
+scheduler:
+  plan:
+    create: 0 0/2 14-16 * * *
+    freeze: 0/30 * * * * *
+    finish: 0 0/1 * * * *
