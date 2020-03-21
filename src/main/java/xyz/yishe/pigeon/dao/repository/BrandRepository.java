@@ -4,6 +4,7 @@ import org.springframework.data.repository.CrudRepository;
 import xyz.yishe.pigeon.dao.entity.BrandEntity;
 
 /**
+ * 品牌
  * @author aotianpan
  * @date 2020-03-21 10:43 上午
  */

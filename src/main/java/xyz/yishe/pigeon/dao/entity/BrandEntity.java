@@ -16,6 +16,7 @@ import java.util.Date;
 /**
  * @author aotianpan
  * @date 2020-03-21 10:37 上午
+ * 品牌
  */
 @Data
 @Builder
