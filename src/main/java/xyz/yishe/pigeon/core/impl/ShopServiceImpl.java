@@ -58,9 +58,6 @@ public class ShopServiceImpl implements ShopService {
         return ShopCreateResponse.builder().shopId(shopId).build();
     }
 
-
-
-
     /**
      * 查询店铺详情
      *

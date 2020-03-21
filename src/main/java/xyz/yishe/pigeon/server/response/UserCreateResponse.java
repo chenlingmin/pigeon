@@ -19,7 +19,7 @@ import xyz.yishe.pigeon.common.bean.BaseBean;
 @AllArgsConstructor
 @NoArgsConstructor
 @Accessors(chain = true)
-public class UserCreateRresponse extends BaseBean {
+public class UserCreateResponse extends BaseBean {
     @ApiModelProperty("用户编号")
     private String userId;
 }

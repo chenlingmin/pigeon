@@ -1,6 +1,5 @@
 package xyz.yishe.pigeon.server.request;
 
-import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -21,6 +20,9 @@ import xyz.yishe.pigeon.common.bean.BaseBean;
 @NoArgsConstructor
 @Accessors(chain = true)
 public class UserCreateRequest extends BaseBean {
+    @ApiModelProperty("店铺编号")
+    private String shopId;
+
     @ApiModelProperty(value = "联系人")
     private String contact;
 
