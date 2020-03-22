@@ -1,8 +1,7 @@
 package xyz.yishe.pigeon.dao.jpa.repository;
 
 import org.springframework.data.repository.CrudRepository;
-import xyz.yishe.pigeon.dao.jpa.ShopEntity;
-import xyz.yishe.pigeon.dao.jpa.entity.UserEntity;
+import xyz.yishe.pigeon.dao.jpa.entity.ShopEntity;
 
 import java.util.Optional;
 

@@ -1,4 +1,4 @@
-package xyz.yishe.pigeon.dao.jpa.id;
+package xyz.yishe.pigeon.dao.jpa.id.base;
 
 import lombok.Builder;
 import lombok.Getter;

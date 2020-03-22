@@ -6,8 +6,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @Configuration
-@EntityScan(basePackages = "xyz.yishe.pigeon.dao.entity")
+@EntityScan(basePackages = "xyz.yishe.pigeon.dao.jpa.entity")
 @MapperScan(value = "xyz.yishe.pigeon.dao.mybatis.mapper")
-@EnableJpaRepositories(basePackages = "xyz.yishe.pigeon.dao.repository")
+@EnableJpaRepositories(basePackages = "xyz.yishe.pigeon.dao.jpa.repository")
 public class JpaAndMapperConfiguration {
 }

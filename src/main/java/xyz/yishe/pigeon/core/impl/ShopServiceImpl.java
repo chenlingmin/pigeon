@@ -10,8 +10,9 @@ import xyz.yishe.pigeon.common.exception.BizException;
 import xyz.yishe.pigeon.common.model.enums.ShopStateEnum;
 import xyz.yishe.pigeon.common.util.CommonUtils;
 import xyz.yishe.pigeon.core.ShopService;
+import xyz.yishe.pigeon.core.event.ShopBanEvent;
 import xyz.yishe.pigeon.core.event.ShopCreateEvent;
-import xyz.yishe.pigeon.dao.jpa.ShopEntity;
+import xyz.yishe.pigeon.dao.jpa.entity.ShopEntity;
 import xyz.yishe.pigeon.dao.jpa.repository.ShopRepository;
 import xyz.yishe.pigeon.server.request.ShopCreateRequest;
 import xyz.yishe.pigeon.server.response.ShopCreateResponse;
@@ -56,6 +57,37 @@ public class ShopServiceImpl implements ShopService {
         );
 
         return ShopCreateResponse.builder().shopId(shopId).build();
+    }
+
+    @Override
+    @Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor = Exception.class)
+    public void pass(String shopId) {
+        ShopEntity shopEntity = this.load(shopId);
+        shopEntity.setState(ShopStateEnum.OK.getValue());
+        shopRepository.save(shopEntity);
+    }
+
+    @Override
+    @Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor = Exception.class)
+    public void ban(String shopId) {
+        ShopEntity shopEntity = this.load(shopId);
+        shopEntity.setState(ShopStateEnum.BAN.getValue());
+        shopRepository.save(shopEntity);
+
+        // 发布店铺禁用事件
+        applicationEventPublisher.publishEvent(
+                ShopBanEvent.builder().shopId(shopId).build()
+        );
+    }
+
+    @Override
+    public ShopEntity get(String shopId) {
+        return shopRepository.findById(shopId).orElse(null);
+    }
+
+    @Override
+    public ShopEntity load(String shopId) {
+        return shopRepository.findById(shopId).orElseThrow(() -> new BizException("店铺不存在！店铺编号: " + shopId));
     }
 
     /**

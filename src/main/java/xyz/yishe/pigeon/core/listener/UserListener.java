@@ -5,7 +5,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 import xyz.yishe.pigeon.core.UserService;
+import xyz.yishe.pigeon.core.event.ShopBanEvent;
 import xyz.yishe.pigeon.core.event.ShopCreateEvent;
+import xyz.yishe.pigeon.server.request.UserCreateRequest;
 
 /**
  * @author owen
@@ -23,7 +25,18 @@ public class UserListener {
      * @param shopCreateEvent
      */
     @EventListener
-    public void onShopCreate(ShopCreateEvent shopCreateEvent){
+    public void onShopCreate(ShopCreateEvent shopCreateEvent) {
+        userService.create(shopCreateEvent.convert(UserCreateRequest::new));
+    }
+
+    /**
+     * 监听店铺禁用事件
+     *
+     * @param shopBanEvent
+     */
+    @EventListener
+    public void onShopBan(ShopBanEvent shopBanEvent) {
+        String shopId = shopBanEvent.getShopId();
 
 
     }
