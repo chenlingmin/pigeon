@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="xyz.yishe.pigeon.dao.mybatis.mapper.BrandMapper">
+
+    <select id="listBrand" parameterType="xyz.yishe.pigeon.dao.mybatis.bo.BrandQueryBo"
+            resultType="xyz.yishe.pigeon.dao.mybatis.vo.BrandVo">
+        SELECT
+        id,
+        `name`,
+        alias,
+        english_name,
+        `type`,
+        introduction,
+        logo,
+        url,
+        create_time,
+        parent_id
+        FROM brand
+        <where>
+            <if test="id != '' and id != null">
+                and id = #{id}
+            </if>
+            <if test="name != '' and name != null">
+                and (`name` like concat('%', #{name}, '%')
+                or english_name like concat('%', #{name}, '%')
+                )
+            </if>
+        </where>
+    </select>
+</mapper>
+

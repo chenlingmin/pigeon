@@ -32,7 +32,7 @@ public class UserEntity extends BaseBean {
     @GeneratedValue(generator = "UserIdGenerator")
     @GenericGenerator(
             name = "UserIdGenerator",
-            strategy = "xyz.yishe.pigeon.dao.id.generator.UserIdGenerator"
+            strategy = "xyz.yishe.pigeon.dao.jpa.id.generator.UserIdGenerator"
     )
     private String id;
 

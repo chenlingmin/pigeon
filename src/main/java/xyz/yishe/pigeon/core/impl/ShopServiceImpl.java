@@ -11,7 +11,7 @@ import xyz.yishe.pigeon.common.model.enums.ShopStateEnum;
 import xyz.yishe.pigeon.common.util.CommonUtils;
 import xyz.yishe.pigeon.core.ShopService;
 import xyz.yishe.pigeon.core.event.ShopCreateEvent;
-import xyz.yishe.pigeon.dao.jpa.ShopEntity;
+import xyz.yishe.pigeon.dao.jpa.entity.ShopEntity;
 import xyz.yishe.pigeon.dao.jpa.repository.ShopRepository;
 import xyz.yishe.pigeon.server.request.ShopCreateRequest;
 import xyz.yishe.pigeon.server.response.ShopCreateResponse;

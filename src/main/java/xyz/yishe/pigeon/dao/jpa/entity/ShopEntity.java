@@ -1,4 +1,4 @@
-package xyz.yishe.pigeon.dao.jpa;
+package xyz.yishe.pigeon.dao.jpa.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -32,7 +32,7 @@ public class ShopEntity extends BaseBean {
     @GeneratedValue(generator = "shopIdGenerator")
     @GenericGenerator(
             name = "shopIdGenerator",
-            strategy = "xyz.yishe.pigeon.dao.id.generator.ShopIdGenerator"
+            strategy = "xyz.yishe.pigeon.dao.jpa.id.generator.ShopIdGenerator"
     )
     private String id;
 
