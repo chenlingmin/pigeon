@@ -1,9 +1,9 @@
 package xyz.yishe.pigeon.dao.jpa.id.generator;
 
 
-import xyz.yishe.pigeon.dao.jpa.id.EnhanceTableGenerator;
-import xyz.yishe.pigeon.dao.jpa.id.EnhanceTableGeneratorConfig;
-import xyz.yishe.pigeon.dao.jpa.id.SimpleEnhanceTableGeneratorConfig;
+import xyz.yishe.pigeon.dao.jpa.id.base.EnhanceTableGenerator;
+import xyz.yishe.pigeon.dao.jpa.id.base.EnhanceTableGeneratorConfig;
+import xyz.yishe.pigeon.dao.jpa.id.base.SimpleEnhanceTableGeneratorConfig;
 
 /**
  * 店铺主键

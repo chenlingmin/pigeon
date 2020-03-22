@@ -1,4 +1,4 @@
-package xyz.yishe.pigeon.dao.jpa.id;
+package xyz.yishe.pigeon.dao.jpa.id.base;
 
 import org.hibernate.MappingException;
 import org.hibernate.engine.spi.SharedSessionContractImplementor;

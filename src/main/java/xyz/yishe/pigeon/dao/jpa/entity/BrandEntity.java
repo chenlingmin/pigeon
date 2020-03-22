@@ -25,7 +25,6 @@ import java.util.Date;
 @Entity
 @Table(name = "brand")
 public class BrandEntity extends BaseBean {
-
     @Id
     @Column(columnDefinition = "VARCHAR(32) COMMENT '编号'")
     private String id;

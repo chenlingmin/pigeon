@@ -1,5 +1,7 @@
 package xyz.yishe.pigeon.core;
 
+import xyz.yishe.pigeon.common.exception.BizException;
+import xyz.yishe.pigeon.dao.jpa.entity.ShopEntity;
 import xyz.yishe.pigeon.server.request.ShopCreateRequest;
 import xyz.yishe.pigeon.server.response.ShopCreateResponse;
 
@@ -15,4 +17,35 @@ public interface ShopService {
      * @return
      */
     ShopCreateResponse create(ShopCreateRequest shopCreateRequest);
+
+    /**
+     * 审核通过
+     *
+     * @param shopId
+     */
+    void pass(String shopId);
+
+    /**
+     * 禁用店铺
+     *
+     * @param shopId
+     */
+    void ban(String shopId);
+
+    /**
+     * 查询店铺详情
+     *
+     * @param shopId
+     * @return
+     */
+    ShopEntity get(String shopId);
+
+    /**
+     * 查询店铺详情
+     *
+     * @param shopId
+     * @return
+     * @throws BizException
+     */
+    ShopEntity load(String shopId) throws BizException;
 }
