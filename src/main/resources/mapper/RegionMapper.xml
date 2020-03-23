@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="xyz.yishe.pigeon.dao.mybatis.mapper.RegionMapper">
+
+    <select id="listRegion" parameterType="xyz.yishe.pigeon.dao.mybatis.bo.RegionQueryBo"
+            resultType="xyz.yishe.pigeon.dao.mybatis.vo.RegionVo">
+        SELECT
+        area_code,
+        `no`,
+        parent_no,
+        `level`,
+        zip_code,
+        city_code,
+        `name`,
+        short_name,
+        merger_name,
+        pinyin,
+        lon,
+        lat,
+        full_name,
+        province_name,
+        city_name,
+        county_name
+        FROM region
+        <where>
+            <if test="areaCode != '' and areaCode != null">
+                and area_code = #{areaCode}
+            </if>
+            <if test="name != '' and name != null">
+                and `name` like concat('%', #{name}, '%')
+            </if>
+            <if test="parentNo != '' and parentNo != null">
+                and parent_no = #{parentNo}
+            </if>
+            <if test="level != null">
+                and `level` = #{level}
+            </if>
+        </where>
+    </select>
+</mapper>
+

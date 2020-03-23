@@ -19,9 +19,9 @@ import xyz.yishe.pigeon.server.response.BrandResponse;
  * @author aotianpan
  * @date 2020-03-22 8:42 上午
  */
-@Api(value = "/brand")
 @RestController
-@RequestMapping(value = "/brand")
+@RequestMapping("/brand")
+@Api(value = "/brand", tags = "品牌")
 @RequiredArgsConstructor
 public class BrandEndpoint extends BaseEndpoint {
     private final BrandService brandService;

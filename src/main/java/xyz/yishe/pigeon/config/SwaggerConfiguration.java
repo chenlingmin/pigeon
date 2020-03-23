@@ -39,7 +39,8 @@ public class SwaggerConfiguration {
                         regex("/role.*"),
                         regex("/user-role.*"),
                         regex("/lead.*"),
-                        regex("/config.*")
+                        regex("/config.*"),
+                        regex("/brand.*")
                 ))
                 .build();
     }
