@@ -9,6 +9,7 @@ import xyz.yishe.pigeon.common.bean.CustomizedResponseEntity;
 import xyz.yishe.pigeon.core.ShopService;
 import xyz.yishe.pigeon.server.request.ShopCreateRequest;
 import xyz.yishe.pigeon.server.response.ShopCreateResponse;
+import xyz.yishe.pigeon.server.response.UserCreateResponse;
 
 import static xyz.yishe.pigeon.common.bean.CustomizedResponseEntity.ok;
 import static xyz.yishe.pigeon.config.SpringSessionConfiguration.TOKEN_HEADER;
@@ -30,5 +31,21 @@ public class ShopEndpoint extends BaseEndpoint {
     public CustomizedResponseEntity<ShopCreateResponse> create(
             @RequestHeader(TOKEN_HEADER) String token, @RequestBody ShopCreateRequest shopCreateRequest) {
         return ok(shopService.create(shopCreateRequest));
+    }
+
+    @ApiOperation("禁用店铺")
+    @PostMapping(value = "ban/{shopId}")
+    public CustomizedResponseEntity<UserCreateResponse> ban(
+            @RequestHeader(TOKEN_HEADER) String token, @PathVariable String shopId) {
+        shopService.ban(shopId);
+        return CustomizedResponseEntity.ok();
+    }
+
+    @ApiOperation("启用店铺")
+    @PostMapping(value = "pass/{shopId}")
+    public CustomizedResponseEntity<UserCreateResponse> pass(
+            @RequestHeader(TOKEN_HEADER) String token, @PathVariable String shopId) {
+        shopService.pass(shopId);
+        return CustomizedResponseEntity.ok();
     }
 }
