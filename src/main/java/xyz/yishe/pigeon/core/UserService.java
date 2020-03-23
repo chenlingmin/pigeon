@@ -3,6 +3,7 @@ package xyz.yishe.pigeon.core;
 import xyz.yishe.pigeon.common.exception.BizException;
 import xyz.yishe.pigeon.dao.jpa.entity.UserEntity;
 import xyz.yishe.pigeon.server.request.UserCreateRequest;
+import xyz.yishe.pigeon.server.request.UserLoginRequest;
 import xyz.yishe.pigeon.server.response.UserCreateResponse;
 
 /**
@@ -16,6 +17,35 @@ public interface UserService {
      * @return
      */
     UserCreateResponse create(UserCreateRequest userCreateRequest);
+
+    /**
+     * 用户登录
+     *
+     * @param userLoginRequest
+     * @return
+     */
+    UserEntity login(UserLoginRequest userLoginRequest);
+
+    /**
+     * 启用用户
+     *
+     * @param userId
+     */
+    void pass(String userId);
+
+    /**
+     * 禁用用户
+     *
+     * @param userId
+     */
+    void ban(String userId);
+
+    /**
+     * 店铺禁用
+     *
+     * @param shopId
+     */
+    void shopBan(String shopId);
 
     /**
      * 查询用户详情

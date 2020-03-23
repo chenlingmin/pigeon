@@ -35,6 +35,7 @@ public class SwaggerConfiguration {
                 .enable(swaggerProperties.isEnable())
                 .select()
                 .paths(or(
+                        regex("/shop.*"),
                         regex("/user.*"),
                         regex("/role.*"),
                         regex("/user-role.*"),

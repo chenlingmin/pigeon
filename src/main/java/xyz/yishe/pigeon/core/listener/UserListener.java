@@ -37,7 +37,6 @@ public class UserListener {
     @EventListener
     public void onShopBan(ShopBanEvent shopBanEvent) {
         String shopId = shopBanEvent.getShopId();
-
-
+        userService.shopBan(shopId);
     }
 }

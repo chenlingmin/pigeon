@@ -29,6 +29,11 @@ public class UserInfo extends BaseBean {
     private String nickname;
 
     /**
+     * 手机号
+     */
+    private String phone;
+
+    /**
      * OPEN ID
      */
     private String openId;
