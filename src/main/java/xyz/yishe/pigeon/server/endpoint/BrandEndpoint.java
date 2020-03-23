@@ -12,6 +12,7 @@ import xyz.yishe.pigeon.common.model.page.PageQuery;
 import xyz.yishe.pigeon.common.model.page.PageResult;
 import xyz.yishe.pigeon.core.BrandService;
 import xyz.yishe.pigeon.server.request.BrandQueryRequest;
+import xyz.yishe.pigeon.server.request.BrandRequest;
 import xyz.yishe.pigeon.server.response.BrandResponse;
 
 /**
@@ -40,5 +41,26 @@ public class BrandEndpoint extends BaseEndpoint {
             @RequestBody PageQuery<BrandQueryRequest> pageQuery
     ) {
         return CustomizedResponseEntity.ok(brandService.pageQuery(pageQuery));
+    }
+
+    @ApiOperation("新增品牌")
+    @PostMapping(value = "/add")
+    public CustomizedResponseEntity add(@RequestBody BrandRequest brandRequest) {
+        brandService.add(brandForm);
+        return ok();
+    }
+
+    @ApiOperation("修改品牌")
+    @PostMapping(value = "/update")
+    public CustomizedResponseEntity update(@RequestBody UpdateBrandForm brandForm) throws LogicException {
+        brandService.update(brandForm);
+        return ok();
+    }
+
+    @ApiOperation("删除菜单")
+    @PostMapping(value = "/delete")
+    public CustomizedResponseEntity delete(@RequestBody BrandForm brandForm) throws LogicException {
+        brandService.delete(brandForm);
+        return ok();
     }
 }
