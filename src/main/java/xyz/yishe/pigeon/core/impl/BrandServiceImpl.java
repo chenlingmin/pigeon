@@ -9,17 +9,22 @@ import org.springframework.transaction.annotation.Transactional;
 import xyz.yishe.pigeon.common.model.page.PageQuery;
 import xyz.yishe.pigeon.common.model.page.PageResult;
 import xyz.yishe.pigeon.common.model.page.PageSupport;
+import xyz.yishe.pigeon.common.util.CommonUtils;
 import xyz.yishe.pigeon.core.BrandService;
 import xyz.yishe.pigeon.dao.jpa.entity.BrandEntity;
+import xyz.yishe.pigeon.dao.jpa.repository.BrandRepository;
 import xyz.yishe.pigeon.dao.mybatis.bo.BrandQueryBo;
 import xyz.yishe.pigeon.dao.mybatis.mapper.BrandMapper;
 import xyz.yishe.pigeon.dao.mybatis.vo.BrandVo;
 import xyz.yishe.pigeon.server.request.BrandQueryRequest;
+import xyz.yishe.pigeon.server.request.BrandRequest;
 import xyz.yishe.pigeon.server.response.BrandResponse;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import static java.lang.String.format;
 
 /**
  * 品牌
@@ -32,6 +37,17 @@ import java.util.stream.Collectors;
 public class BrandServiceImpl implements BrandService {
     private final BrandRepository brandRepository;
     private final BrandMapper brandMapper;
+
+    /**
+     * 根据品牌编号获取品牌信息
+     *
+     * @param brandId 品牌编号
+     * @return
+     */
+    public BrandEntity load(String brandId) {
+        return brandRepository.findById(brandId)
+                .orElseThrow(() -> new LogicException(format("品牌不存在, 品牌编号:%s", brandId)));
+    }
 
     @Override
     public PageResult<BrandResponse> pageQuery(PageQuery<BrandQueryRequest> pageQuery) {
@@ -56,19 +72,19 @@ public class BrandServiceImpl implements BrandService {
     /**
      * 新增品牌
      *
-     * @param brandForm 品牌
+     * @param brandRequest 品牌
      */
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-    public Brand add(BrandForm brandForm) {
+    public BrandResponse add(BrandRequest brandRequest) {
         // 去重
-        String parentId = brandForm.getParentId();
+        String parentId = brandRequest.getParentId();
         if (CommonUtils.isNotEmpty(parentId)) {
-            List<Brand> brandList = brandRepository.findByNameAndParentId(brandForm.getName(), parentId);
+            List<BrandEntity> brandList = brandRepository.findByNameAndParentId(brandRequest.getName(), parentId);
             if (CommonUtils.isNotEmpty(brandList)) {
-                throw new LogicException("品牌已存在");
+                throw new Exception("品牌已存在");
             }
         } else {
-            List<Brand> brandList = brandRepository.findByNameAndParentIdIsNull(brandForm.getName());
+            List<BrandEntity> brandList = brandRepository.findByNameAndParentIdIsNull(brandRequest.getName());
             if (CommonUtils.isNotEmpty(brandList)) {
                 throw new LogicException("品牌已存在");
             }
@@ -76,7 +92,7 @@ public class BrandServiceImpl implements BrandService {
 
         // 新增
         return brandRepository.save(
-                brandForm.convert(Brand::new)
+                brandRequest.convert(BrandEntity::new)
                         .setId(createId())
                         .setDelFlag(UN_DEL.getValue()));
     }
