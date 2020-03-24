@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import xyz.yishe.pigeon.common.bean.BaseBean;
 
@@ -23,27 +22,20 @@ import java.util.Date;
 @NoArgsConstructor
 @Accessors(chain = true)
 @Entity
-@Table(name = "role")
+@Table(name = "role_menu")
 @EntityListeners(AuditingEntityListener.class)
-public class RoleEntity extends BaseBean {
+public class RoleMenuEntity extends BaseBean {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(columnDefinition = "VARCHAR(64) COMMENT '名称'")
-    private String roleName;
+    @Column(columnDefinition = "INT COMMENT '角色编号'")
+    private Integer roleId;
 
-    /**
-     * @see xyz.yishe.pigeon.common.model.enums.RoleStateEnum
-     */
-    @Column(columnDefinition = "INT COMMENT '状态 1：正常 2：禁用'")
-    private Integer state;
+    @Column(columnDefinition = "INT COMMENT '菜单编号'")
+    private Integer menuId;
 
     @Column(columnDefinition = "DATETIME COMMENT '创建时间'")
     @CreatedDate
     private Date createDate;
-
-    @Column(columnDefinition = "DATETIME COMMENT '更新时间'")
-    @LastModifiedDate
-    private Date modifyDate;
 }

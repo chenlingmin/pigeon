@@ -12,12 +12,15 @@ import xyz.yishe.pigeon.common.model.enums.UserStateEnum;
 import xyz.yishe.pigeon.common.util.CommonUtils;
 import xyz.yishe.pigeon.core.UserService;
 import xyz.yishe.pigeon.dao.jpa.entity.UserEntity;
+import xyz.yishe.pigeon.dao.jpa.entity.UserRoleEntity;
 import xyz.yishe.pigeon.dao.jpa.repository.UserRepository;
+import xyz.yishe.pigeon.dao.jpa.repository.UserRoleRepository;
 import xyz.yishe.pigeon.server.request.UserCreateRequest;
 import xyz.yishe.pigeon.server.request.UserLoginRequest;
 import xyz.yishe.pigeon.server.response.UserCreateResponse;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author owen
@@ -28,6 +31,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
+    private final UserRoleRepository userRoleRepository;
 
     @Override
     @Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor = Exception.class)
@@ -107,25 +111,39 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void shopBan(String shopId) {
-        List<UserEntity> userEntityList = userRepository.findByShopId(shopId);
-        if (CommonUtils.isEmpty(userEntityList)) {
-            return;
-        }
-
-        // 禁用用户
-        userEntityList.forEach(user -> ban(user.getId()));
-    }
-
-    /**
-     * 查询用户详情
-     *
-     * @param phone
-     * @return
-     */
-    private UserEntity getByPhone(String phone) {
+    public UserEntity getByPhone(String phone) {
         return userRepository.findByPhone(phone).orElse(null);
     }
+
+
+    @Override
+    public void authorize(String userId, List<Integer> roleId) {
+        // 查询用户详情
+        this.load(userId);
+
+        // 删除所有用户角色
+        int count = userRoleRepository.deleteByUserId(userId);
+        log.info("成功删除 {} 用户角色信息,用户编号：{}", count, userId);
+
+        // 保存用户角色
+        userRoleRepository.saveAll(
+                roleId.stream()
+                        .map(role -> UserRoleEntity.builder()
+                                .userId(userId)
+                                .roleId(role)
+                                .build())
+                        .collect(Collectors.toList())
+        );
+    }
+
+
+    @Override
+    public List<UserRoleEntity> listUserRole(String userId) {
+        return userRoleRepository.listUserRole(userId);
+    }
+
+
+
 
     /**
      * 初始化用户密码
@@ -137,7 +155,7 @@ public class UserServiceImpl implements UserService {
         String phone = userEntity.getPhone();
         String salt = DigestUtils.md5Hex(RandomStringUtils.random(8)); // 盐值
         String reverse = new StringBuffer(phone).reverse().toString(); // 密码反转
-        String passwordClear = reverse.concat(reverse.substring(0, 6)); //  明文
+        String passwordClear = reverse.substring(0, 6); //  明文
         String passwordCipher = this.password(passwordClear, salt);
         userEntity.setSalt(salt);
         userEntity.setPassword(passwordCipher);

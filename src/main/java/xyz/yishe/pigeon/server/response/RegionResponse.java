@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
+import xyz.yishe.pigeon.common.bean.BaseBean;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -16,8 +17,8 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @Accessors(chain = true)
-@ApiModel("行政区域实体")
-public class RegionResponse {
+@ApiModel("行政区域响应")
+public class RegionResponse extends BaseBean {
     @ApiModelProperty(value = "序号")
     private Integer no;
 

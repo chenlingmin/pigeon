@@ -17,10 +17,9 @@ public class WebConfiguration implements WebMvcConfigurer {
     private static final String[] businessExcludes = {
             "/",
             "/error/**",
+            "/user/login",                             // 登录
             "/user/create",                            // 创建用户（临时）
-            "/user/quick-login",                       // 快速登录，用open-id登录
-            "/user/web-login",                         // 网页登录，用open-id登录
-            "/user/wechat-login"                       // 微信登录
+            "/shop/create",                            // 创建店铺（临时）
 
     };
 

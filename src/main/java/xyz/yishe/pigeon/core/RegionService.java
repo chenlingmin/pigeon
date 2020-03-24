@@ -22,5 +22,5 @@ public interface RegionService {
      * 查询省市区树
      * @return
      */
-    List<RegionResponse> queryTree();
+    List<RegionResponse> tree();
 }

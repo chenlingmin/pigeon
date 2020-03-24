@@ -6,21 +6,20 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 import xyz.yishe.pigeon.common.bean.BaseBean;
 
 /**
- * @author aotianpan
- * @date 2020-03-21 5:27 下午
+ * @author owen
+ * @date 2020-03-21 14:38
  */
+@ApiModel("创建角色请求")
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@ApiModel("品牌查询")
-public class BrandQueryRequest extends BaseBean {
-    @ApiModelProperty("品牌编号")
-    private String id;
-
-    @ApiModelProperty("品牌名称")
-    private String name;
+@Accessors(chain = true)
+public class RoleCreateRequest extends BaseBean {
+    @ApiModelProperty("角色名称")
+    private String roleName;
 }

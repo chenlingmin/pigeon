@@ -23,20 +23,37 @@ import java.util.Date;
 @NoArgsConstructor
 @Accessors(chain = true)
 @Entity
-@Table(name = "role")
+@Table(name = "menu")
 @EntityListeners(AuditingEntityListener.class)
-public class RoleEntity extends BaseBean {
+public class MenuEntity extends BaseBean {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(columnDefinition = "INT COMMENT '父编号'")
+    private Integer pid;
+
     @Column(columnDefinition = "VARCHAR(64) COMMENT '名称'")
-    private String roleName;
+    private String name;
 
     /**
-     * @see xyz.yishe.pigeon.common.model.enums.RoleStateEnum
+     * @see xyz.yishe.pigeon.common.model.enums.MenuTypeEnum
      */
-    @Column(columnDefinition = "INT COMMENT '状态 1：正常 2：禁用'")
+    @Column(columnDefinition = "INT COMMENT '类型 1：菜单 2：功能'")
+    private Integer type;
+
+    @Column(columnDefinition = "INT COMMENT '层级 1：一级菜单 2：二级菜单 3：三级菜单'")
+    private Integer tier;
+
+    @Column(columnDefinition = "VARCHAR(256) COMMENT '前端路由'")
+    private String route;
+
+    @Column(columnDefinition = "VARCHAR(256) COMMENT '后端路由'")
+    private String url;
+
+    /**
+     * @see xyz.yishe.pigeon.common.model.enums.MenuStateEnum
+     */
+    @Column(columnDefinition = "INT COMMENT '状态 1：启用 2：禁用'")
     private Integer state;
 
     @Column(columnDefinition = "DATETIME COMMENT '创建时间'")

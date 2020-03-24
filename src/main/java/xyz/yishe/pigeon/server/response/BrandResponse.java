@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
+import xyz.yishe.pigeon.common.bean.BaseBean;
 
 import java.util.Date;
 
@@ -14,14 +15,13 @@ import java.util.Date;
  * @author aotianpan
  * @date 2020-03-21 5:23 下午
  */
-@ApiModel("品牌")
+@ApiModel("品牌响应")
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Accessors(chain = true)
-public class BrandResponse {
-
+public class BrandResponse extends BaseBean {
     @ApiModelProperty("编号")
     private String id;
 
