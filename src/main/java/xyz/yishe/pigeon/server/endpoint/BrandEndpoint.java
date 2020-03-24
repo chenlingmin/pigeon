@@ -13,8 +13,6 @@ import xyz.yishe.pigeon.server.request.BrandRequest;
 import xyz.yishe.pigeon.server.request.UpdateBrandRequest;
 import xyz.yishe.pigeon.server.response.BrandResponse;
 
-import static xyz.yishe.pigeon.config.SpringSessionConfiguration.TOKEN_HEADER;
-
 import static xyz.yishe.pigeon.common.bean.CustomizedResponseEntity.ok;
 
 /**
@@ -31,14 +29,9 @@ public class BrandEndpoint extends BaseEndpoint {
     private final BrandService brandService;
 
     @ApiOperation(value = "查询品牌详情")
-    @PostMapping("/query")
-    public CustomizedResponseEntity<BrandResponse> query(
-            @RequestBody BrandQueryRequest request
-            ) {
-        return ok(brandService.query(request));
     @PostMapping("detail/{brandId}")
     public CustomizedResponseEntity<BrandResponse> detail(
-            @RequestHeader(TOKEN_HEADER) String token, @PathVariable String brandId) {
+            @PathVariable String brandId) {
         return CustomizedResponseEntity.ok(brandService.detail(brandId));
     }
 
@@ -69,7 +62,5 @@ public class BrandEndpoint extends BaseEndpoint {
     public CustomizedResponseEntity delete(@RequestBody BrandRequest brandRequest) {
         brandService.delete(brandRequest);
         return ok();
-            @RequestHeader(TOKEN_HEADER) String token, @RequestBody PageQuery<BrandQueryRequest> pageQuery) {
-        return CustomizedResponseEntity.ok(brandService.pageQuery(pageQuery));
     }
 }

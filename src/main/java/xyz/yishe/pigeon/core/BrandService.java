@@ -1,16 +1,11 @@
 package xyz.yishe.pigeon.core;
 
-import org.springframework.beans.BeanUtils;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 import xyz.yishe.pigeon.common.model.page.PageQuery;
 import xyz.yishe.pigeon.common.model.page.PageResult;
 import xyz.yishe.pigeon.server.request.BrandQueryRequest;
 import xyz.yishe.pigeon.server.request.BrandRequest;
 import xyz.yishe.pigeon.server.request.UpdateBrandRequest;
 import xyz.yishe.pigeon.server.response.BrandResponse;
-
-import java.util.List;
 
 /**
  * 品牌
@@ -33,7 +28,7 @@ public interface BrandService {
      * @param brandId
      * @return
      */
-    BrandResponse query(BrandQueryRequest request);
+    BrandResponse detail(String brandId);
 
     /**
      * 新增品牌
@@ -55,5 +50,4 @@ public interface BrandService {
      * @param brandRequest 品牌信息
      */
     void delete(BrandRequest brandRequest);
-    BrandResponse detail(String brandId);
 }
