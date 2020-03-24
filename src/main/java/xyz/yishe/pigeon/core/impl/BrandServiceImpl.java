@@ -24,13 +24,12 @@ import xyz.yishe.pigeon.server.request.UpdateBrandRequest;
 import xyz.yishe.pigeon.server.response.BrandResponse;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static java.lang.String.format;
 
 /**
- * 品牌
+ * 品牌业务类
  *
  * @author aotianpan
  * @date 2020-03-21 5:30 下午
@@ -56,20 +55,21 @@ public class BrandServiceImpl implements BrandService {
     public PageResult<BrandResponse> pageQuery(PageQuery<BrandQueryRequest> pageQuery) {
         BrandQueryRequest queryRequest = pageQuery.getConditions();
         List<BrandVo> brandVos = brandMapper.listBrand(queryRequest.convert(BrandQueryBo::new));
-        List<BrandResponse> list = brandVos.stream().map(brandVo ->
-                brandVo.convert(BrandResponse::new)).collect(Collectors.toList());
+        List<BrandResponse> list = brandVos.stream()
+                .map(brandVo -> brandVo.convert(BrandResponse::new))
+                .collect(Collectors.toList());
         PageInfo<BrandResponse> pageInfo = new PageInfo<>(list);
         PageResult<BrandResponse> pageResult = PageSupport.convert(pageInfo);
         return pageResult;
     }
 
     @Override
-    public BrandResponse query(BrandQueryRequest request) {
-        Optional<BrandEntity> optional = brandRepository.findById(request.getId());
-        if (optional.isPresent()) {
+    public BrandResponse detail(String brandId) {
+        BrandEntity brandEntity = brandRepository.findById(brandId).orElse(null);
+        if (CommonUtils.isEmpty(brandEntity)) {
             return null;
         }
-        return optional.get().convert(BrandResponse::new);
+        return brandEntity.convert(BrandResponse::new);
     }
 
     /**

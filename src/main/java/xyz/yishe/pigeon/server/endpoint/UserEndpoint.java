@@ -51,7 +51,8 @@ public class UserEndpoint extends BaseEndpoint {
     @ApiOperation("创建用户")
     @PostMapping(value = "create")
     public CustomizedResponseEntity<UserCreateResponse> create(
-            @RequestHeader(TOKEN_HEADER) String token, @RequestBody UserCreateRequest userCreateRequest) {
+//            @RequestHeader(TOKEN_HEADER) String token,
+            @RequestBody UserCreateRequest userCreateRequest) {
         return CustomizedResponseEntity.ok(userService.create(userCreateRequest));
     }
 

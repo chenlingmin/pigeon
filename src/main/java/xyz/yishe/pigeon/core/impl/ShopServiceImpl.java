@@ -12,6 +12,7 @@ import xyz.yishe.pigeon.common.util.CommonUtils;
 import xyz.yishe.pigeon.core.ShopService;
 import xyz.yishe.pigeon.core.event.ShopBanEvent;
 import xyz.yishe.pigeon.core.event.ShopCreateEvent;
+import xyz.yishe.pigeon.core.event.ShopPassEvent;
 import xyz.yishe.pigeon.dao.jpa.entity.ShopEntity;
 import xyz.yishe.pigeon.dao.jpa.repository.ShopRepository;
 import xyz.yishe.pigeon.server.request.ShopCreateRequest;
@@ -37,7 +38,7 @@ public class ShopServiceImpl implements ShopService {
 
         // 重复性校验
         ShopEntity shopEntity = this.getByPhone(phone);
-        if (CommonUtils.isEmpty(shopEntity)) {
+        if (CommonUtils.isNotEmpty(shopEntity)) {
             throw new BizException("店铺创建失败,联系人手机号码重复!");
         }
 
@@ -63,8 +64,15 @@ public class ShopServiceImpl implements ShopService {
     @Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor = Exception.class)
     public void pass(String shopId) {
         ShopEntity shopEntity = this.load(shopId);
+        String phone = shopEntity.getPhone(); // 店铺负责人手机号
         shopEntity.setState(ShopStateEnum.OK.getValue());
         shopRepository.save(shopEntity);
+
+        // 发布店铺启用事件
+        applicationEventPublisher.publishEvent(
+                ShopPassEvent.builder().shopId(shopId).phone(phone).build()
+        );
+
     }
 
     @Override

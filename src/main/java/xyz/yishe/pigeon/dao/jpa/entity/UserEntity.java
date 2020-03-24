@@ -54,9 +54,6 @@ public class UserEntity extends BaseBean {
     @Column(columnDefinition = "VARCHAR(256) COMMENT '头像'")
     private String avatar;
 
-//    @Column(columnDefinition = "VARCHAR(128) COMMENT '微信OPEN ID'")
-//    private String openId;
-
     /**
      * @see xyz.yishe.pigeon.common.model.enums.UserStateEnum
      */

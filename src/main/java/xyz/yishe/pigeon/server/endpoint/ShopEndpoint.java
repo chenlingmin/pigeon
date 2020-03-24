@@ -29,7 +29,8 @@ public class ShopEndpoint extends BaseEndpoint {
     @PostMapping("create")
     @ApiOperation("创建店铺")
     public CustomizedResponseEntity<ShopCreateResponse> create(
-            @RequestHeader(TOKEN_HEADER) String token, @RequestBody ShopCreateRequest shopCreateRequest) {
+//            @RequestHeader(TOKEN_HEADER) String token,
+            @RequestBody ShopCreateRequest shopCreateRequest) {
         return ok(shopService.create(shopCreateRequest));
     }
 

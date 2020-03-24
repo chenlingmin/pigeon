@@ -14,12 +14,14 @@ import java.util.List;
 
 /**
  * 品牌
+ *
  * @author aotianpan
  * @date 2020-03-21 5:21 下午
  */
 public interface BrandService {
     /**
      * 分页查询品牌列表
+     *
      * @param pageQuery
      * @return
      */
@@ -27,7 +29,8 @@ public interface BrandService {
 
     /**
      * 查询品牌详情
-     * @param request
+     *
+     * @param brandId
      * @return
      */
     BrandResponse query(BrandQueryRequest request);
@@ -52,4 +55,5 @@ public interface BrandService {
      * @param brandRequest 品牌信息
      */
     void delete(BrandRequest brandRequest);
+    BrandResponse detail(String brandId);
 }

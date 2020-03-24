@@ -11,6 +11,5 @@ import java.util.List;
  * @date 2020-03-21 5:54 下午
  */
 public interface BrandMapper {
-
     List<BrandVo> listBrand(BrandQueryBo brandQueryBo);
 }

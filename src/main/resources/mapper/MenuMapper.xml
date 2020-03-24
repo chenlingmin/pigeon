@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="xyz.yishe.pigeon.dao.mybatis.mapper.MenuMapper">
+
+    <select id="query" parameterType="xyz.yishe.pigeon.dao.mybatis.bo.MenuQueryBo"
+            resultType="xyz.yishe.pigeon.dao.mybatis.vo.MenuQueryVo">
+        SELECT
+        id,
+        pid,
+        name,
+        type,
+        tier,
+        route,
+        url
+        FROM menu t
+        <where>
+            t.state = 1
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="pid != null">
+                and pid = #{pid}
+            </if>
+            <if test="type != null">
+                and type = #{type}
+            </if>
+            <if test="tier != null">
+                and tier = #{tier}
+            </if>
+        </where>
+    </select>
+</mapper>
+
