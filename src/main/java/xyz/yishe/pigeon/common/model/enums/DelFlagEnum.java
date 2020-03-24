@@ -2,7 +2,7 @@ package xyz.yishe.pigeon.common.model.enums;
 
 import lombok.Getter;
 
-import static java.util.Arrays.stream;
+import java.util.Arrays;
 
 /**
  * 删除标示
@@ -16,7 +16,10 @@ public enum DelFlagEnum {
     DEL        (2, "删除"),
     ;
 
+    // 编号
     private final int value;
+
+    // 名称
     private final String name;
 
     DelFlagEnum(int value, String name) {
@@ -24,8 +27,8 @@ public enum DelFlagEnum {
         this.name = name;
     }
 
-    public static DelFlagEnum fromValue(int value) {
-        return stream(DelFlagEnum.values())
+    public static DelFlagEnum fromValue(Integer value) {
+        return Arrays.stream(DelFlagEnum.values())
                 .filter(e -> e.getValue() == value)
                 .findAny()
                 .orElse(null);

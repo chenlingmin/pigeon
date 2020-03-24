@@ -4,13 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
+import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.annotation.CreatedDate;
 import xyz.yishe.pigeon.common.bean.BaseBean;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 /**
@@ -23,10 +22,16 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Accessors(chain = true)
 @Table(name = "brand")
 public class BrandEntity extends BaseBean {
     @Id
-    @Column(columnDefinition = "VARCHAR(32) COMMENT '编号'")
+    @Column(length = 32)
+    @GeneratedValue(generator = "UserIdGenerator")
+    @GenericGenerator(
+            name = "UserIdGenerator",
+            strategy = "xyz.yishe.pigeon.dao.jpa.id.generator.UserIdGenerator"
+    )
     private String id;
 
     @Column(columnDefinition = "VARCHAR(32) COMMENT '品牌名称'")

@@ -13,7 +13,10 @@ import xyz.yishe.pigeon.common.model.page.PageResult;
 import xyz.yishe.pigeon.core.BrandService;
 import xyz.yishe.pigeon.server.request.BrandQueryRequest;
 import xyz.yishe.pigeon.server.request.BrandRequest;
+import xyz.yishe.pigeon.server.request.UpdateBrandRequest;
 import xyz.yishe.pigeon.server.response.BrandResponse;
+
+import static xyz.yishe.pigeon.common.bean.CustomizedResponseEntity.ok;
 
 /**
  * 品牌
@@ -32,7 +35,7 @@ public class BrandEndpoint extends BaseEndpoint {
     public CustomizedResponseEntity<BrandResponse> query(
             @RequestBody BrandQueryRequest request
             ) {
-        return CustomizedResponseEntity.ok(brandService.query(request));
+        return ok(brandService.query(request));
     }
 
     @ApiOperation(value = "分页查询品牌信息")
@@ -40,27 +43,27 @@ public class BrandEndpoint extends BaseEndpoint {
     public CustomizedResponseEntity<PageResult<BrandResponse>> pageQuery(
             @RequestBody PageQuery<BrandQueryRequest> pageQuery
     ) {
-        return CustomizedResponseEntity.ok(brandService.pageQuery(pageQuery));
+        return ok(brandService.pageQuery(pageQuery));
     }
 
     @ApiOperation("新增品牌")
     @PostMapping(value = "/add")
     public CustomizedResponseEntity add(@RequestBody BrandRequest brandRequest) {
-        brandService.add(brandForm);
+        brandService.add(brandRequest);
         return ok();
     }
 
     @ApiOperation("修改品牌")
     @PostMapping(value = "/update")
-    public CustomizedResponseEntity update(@RequestBody UpdateBrandForm brandForm) throws LogicException {
-        brandService.update(brandForm);
+    public CustomizedResponseEntity update(@RequestBody UpdateBrandRequest brandRequest) {
+        brandService.update(brandRequest);
         return ok();
     }
 
     @ApiOperation("删除菜单")
     @PostMapping(value = "/delete")
-    public CustomizedResponseEntity delete(@RequestBody BrandForm brandForm) throws LogicException {
-        brandService.delete(brandForm);
+    public CustomizedResponseEntity delete(@RequestBody BrandRequest brandRequest) {
+        brandService.delete(brandRequest);
         return ok();
     }
 }
